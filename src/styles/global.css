@@ -1,31 +1,31 @@
 /* ============================================================
-   YAYASAN ALHIDAYAH — Editorial Premium
-   Light cream base / Refined brand palette / Sans-serif typography
+   YAYASAN ALHIDAYAH — Sans-serif Brand Identity
+   Tenang · Amanah · Tulus · Spiritual · Inspiratif
    ============================================================ */
 
 :root {
   --bg: #FAF7F0;
-  --bg-alt: #F2EDE0;
-  --bg-deep: #14315E;
+  --bg-alt: #F0EDE4;
+  --bg-deep: #1E5FA3;
   --paper: #FFFFFF;
 
   --ink: #1A2238;
   --ink-2: #4A5568;
   --ink-3: #8893A8;
-  --ink-on-deep: #F2EDE0;
-  --ink-on-deep-2: #B5C2DA;
+  --ink-on-deep: #FFFFFF;
+  --ink-on-deep-2: #C8DFFF;
 
-  --brand: #14315E;
+  --brand: #1E5FA3;
   --brand-2: #2E7D5B;
-  --brand-3: #1E5BA8;
+  --brand-3: #1E5FA3;
   --accent: #C9A227;
   --highlight: #F5E27A;
 
-  --line: rgba(20, 34, 56, 0.12);
-  --line-strong: rgba(20, 34, 56, 0.22);
-  --line-on-deep: rgba(242, 237, 224, 0.18);
+  --line: rgba(30, 95, 163, 0.10);
+  --line-strong: rgba(30, 95, 163, 0.20);
+  --line-on-deep: rgba(255, 255, 255, 0.18);
 
-  --font-display: 'Bricolage Grotesque', 'Bricolage Grotesque Fallback', system-ui, sans-serif;
+  --font-display: 'Plus Jakarta Sans', 'Plus Jakarta Sans Fallback', system-ui, sans-serif;
   --font-body: 'Plus Jakarta Sans', 'Plus Jakarta Sans Fallback', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
@@ -45,24 +45,24 @@
 [data-theme="dark"] {
   --bg: #0E1525;
   --bg-alt: #161E33;
-  --bg-deep: #060A14;
+  --bg-deep: #0A1A33;
   --paper: #1A2340;
 
   --ink: #F2EDE0;
   --ink-2: #B5C2DA;
   --ink-3: #6B7691;
-  --ink-on-deep: #F2EDE0;
-  --ink-on-deep-2: #B5C2DA;
+  --ink-on-deep: #FFFFFF;
+  --ink-on-deep-2: #C8DFFF;
 
-  --brand: #6FA3F2;
+  --brand: #5A9CE6;
   --brand-2: #5BC587;
-  --brand-3: #8FBAFF;
+  --brand-3: #7AB8FF;
   --accent: #E5C158;
   --highlight: #5C5024;
 
   --line: rgba(242, 237, 224, 0.10);
   --line-strong: rgba(242, 237, 224, 0.22);
-  --line-on-deep: rgba(242, 237, 224, 0.18);
+  --line-on-deep: rgba(255, 255, 255, 0.18);
 }
 
 /* Font fallback metrics to reduce CLS from swap */
@@ -73,14 +73,6 @@
   descent-override: 25%;
   line-gap-override: 0%;
   size-adjust: 102%;
-}
-@font-face {
-  font-family: 'Bricolage Grotesque Fallback';
-  src: local('Arial');
-  ascent-override: 100%;
-  descent-override: 22%;
-  line-gap-override: 0%;
-  size-adjust: 100%;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -132,17 +124,15 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 .display {
   font-family: var(--font-display);
-  font-weight: 500;
-  letter-spacing: -0.035em;
-  line-height: 0.96;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
   color: var(--ink);
-  font-variation-settings: 'opsz' 96;
 }
 .display em {
   font-style: normal;
-  font-weight: 500;
+  font-weight: 700;
   color: var(--brand);
-  font-variation-settings: 'opsz' 96;
   background: none;
   padding: 0 2px;
 }
@@ -194,12 +184,12 @@ section { position: relative; }
 }
 .btn-primary {
   background: var(--brand);
-  color: #FAF7F0;
+  color: #FFFFFF;
 }
 .btn-primary:hover {
-  background: var(--ink);
+  background: #164A82;
   transform: translateY(-1px);
-  box-shadow: 0 12px 28px -10px rgba(20, 34, 56, 0.35);
+  box-shadow: 0 12px 28px -10px rgba(30, 95, 163, 0.4);
 }
 .btn-ghost {
   background: transparent;
@@ -287,7 +277,7 @@ section { position: relative; }
   gap: 12px;
   font-family: var(--font-display);
   font-size: 22px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: -0.02em;
 }
 .brand picture { display: contents; }
@@ -476,12 +466,12 @@ section { position: relative; }
   font-size: clamp(40px, 5.6vw, 84px);
   color: var(--ink-on-deep);
   margin: 0;
-  font-weight: 500;
-  letter-spacing: -0.035em;
+  font-weight: 700;
+  letter-spacing: -0.03em;
 }
 .hero-C .hero-h1 em {
   font-style: normal;
-  font-weight: 500;
+  font-weight: 700;
   color: var(--accent);
 }
 .hero-C .eyebrow { color: var(--ink-on-deep-2); margin-bottom: 20px; }
@@ -543,8 +533,8 @@ section { position: relative; }
 .hero-meta-item .num {
   font-family: var(--font-display);
   font-size: 42px;
-  font-weight: 500;
-  letter-spacing: -0.035em;
+  font-weight: 700;
+  letter-spacing: -0.03em;
   line-height: 1;
   color: var(--brand);
   transition: transform 280ms var(--ease);
@@ -662,14 +652,14 @@ section { position: relative; }
 .why-head h2 {
   font-family: var(--font-display);
   font-size: clamp(36px, 4.8vw, 60px);
-  font-weight: 500;
+  font-weight: 700;
   line-height: 1;
   margin: 16px 0 0;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.03em;
 }
 .why-head h2 em {
   font-style: normal;
-  font-weight: 500;
+  font-weight: 700;
   color: var(--accent);
   background: none;
   padding: 0 2px;
@@ -710,9 +700,9 @@ section { position: relative; }
 .why-card h3 {
   font-family: var(--font-display);
   font-size: 28px;
-  font-weight: 500;
+  font-weight: 700;
   line-height: 1.1;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
   margin: 0 0 16px;
   color: var(--ink-on-deep);
 }
@@ -805,9 +795,9 @@ section { position: relative; }
 .program-body h3 {
   font-family: var(--font-display);
   font-size: 28px;
-  font-weight: 500;
+  font-weight: 700;
   line-height: 1.05;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
   margin: 0 0 12px;
 }
 .program-body p {
@@ -916,8 +906,8 @@ section { position: relative; }
   font-family: var(--font-display);
   font-size: clamp(24px, 2.8vw, 36px);
   line-height: 1.25;
-  letter-spacing: -0.025em;
-  font-weight: 500;
+  letter-spacing: -0.02em;
+  font-weight: 600;
   color: var(--ink);
   margin: 0;
   position: relative;
@@ -925,7 +915,7 @@ section { position: relative; }
 }
 .testi-quote blockquote em {
   font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--brand);
   background: none;
   padding: 0 2px;
@@ -1041,14 +1031,14 @@ section { position: relative; }
 .donor-grid h2 {
   font-family: var(--font-display);
   font-size: clamp(36px, 5vw, 60px);
-  font-weight: 500;
+  font-weight: 700;
   line-height: 1.05;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.03em;
   margin: 16px 0 0;
 }
 .donor-grid h2 em {
   font-style: normal;
-  font-weight: 500;
+  font-weight: 700;
   color: var(--accent);
   background: none;
   padding: 0 2px;
@@ -1221,8 +1211,8 @@ section { position: relative; }
 .marquee-item {
   font-family: var(--font-display);
   font-size: 22px;
-  font-weight: 500;
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  letter-spacing: -0.01em;
   color: var(--ink-2);
   display: flex;
   align-items: center;

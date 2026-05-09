@@ -1157,25 +1157,24 @@ section { position: relative; }
   .foot-bar { font-size: 9px; }
 }
 
-/* Hero CSS-only entrance — no JS, no TBT cost */
+/* Hero — visible immediately for Speed Index, subtle transform only */
 .hero-fade {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: heroFadeIn 800ms var(--ease-emph) forwards;
-  animation-delay: calc(var(--d, 0) * 120ms + 200ms);
+  animation: heroSlideUp 500ms var(--ease-emph) both;
+  animation-delay: calc(var(--d, 0) * 60ms);
 }
-@keyframes heroFadeIn {
-  to { opacity: 1; transform: translateY(0); }
+@keyframes heroSlideUp {
+  from { transform: translateY(8px); }
+  to   { transform: translateY(0); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero-fade { opacity: 1; transform: none; animation: none; }
+  .hero-fade { animation: none; }
 }
 
 /* Animations — scroll reveal */
 [data-reveal] {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 900ms var(--ease-emph), transform 900ms var(--ease-emph);
+  transform: translateY(18px);
+  transition: opacity 600ms var(--ease-emph), transform 600ms var(--ease-emph);
 }
 [data-reveal].in {
   opacity: 1;

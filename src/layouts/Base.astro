@@ -4,9 +4,10 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  noindex?: boolean;
 }
 
-const { title, description = 'Yayasan Alhidayah — Lembaga sosial & keagamaan dari Bandung Barat. Wakaf mushaf Al-Quran, kafarat, dan bantuan sosial untuk fakir miskin, anak yatim, dan penggiat dakwah.' } = Astro.props;
+const { title, description = 'Yayasan Alhidayah — Lembaga sosial & keagamaan dari Bandung Barat. Wakaf mushaf Al-Quran, kafarat, dan bantuan sosial untuk fakir miskin, anak yatim, dan penggiat dakwah.', noindex = false } = Astro.props;
 const canonicalUrl = new URL(Astro.url.pathname, 'https://yayasanalhidayah.com').href;
 const ogImage = 'https://yayasanalhidayah.com/hero-1.jpg';
 
@@ -88,7 +89,7 @@ const jsonLd = {
   <meta name="description" content={description} />
 
   <!-- SEO -->
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
   <link rel="canonical" href={canonicalUrl} />
   <link rel="alternate" hreflang="id" href={canonicalUrl} />
   <link rel="alternate" hreflang="x-default" href={canonicalUrl} />

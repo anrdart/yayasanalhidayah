@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Base title="Halaman Tidak Ditemukan — Yayasan Alhidayah" description="Halaman yang Anda cari tidak ditemukan. Kembali ke beranda Yayasan Alhidayah." noindex>
+  <Header />
+
+  <section class="not-found on-deep">
+    <div class="not-found-inner">
+      <div class="not-found-num-wrap">
+        <span class="not-found-num">4</span>
+        <span class="not-found-num not-found-star">
+          <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M60 0L73.5 46.5L120 60L73.5 73.5L60 120L46.5 73.5L0 60L46.5 46.5L60 0Z" fill="currentColor"/>
+          </svg>
+        </span>
+        <span class="not-found-num">4</span>
+      </div>
+
+      <p class="eyebrow no-rule not-found-eyebrow">Halaman Tidak Ditemukan</p>
+
+      <h1 class="display not-found-h1">
+        Sepertinya Anda<br/>tersesat di <em>jalan</em>
+      </h1>
+
+      <p class="lede not-found-lede">
+        Halaman yang Anda cari mungkin sudah dipindahkan, dihapus, atau tidak pernah ada. Mari kembali ke jalan yang benar.
+      </p>
+
+      <div class="ctas not-found-ctas">
+        <a class="btn btn-primary" href="/">
+          Kembali ke Beranda
+          <span class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="btn btn-ghost" href="https://wa.me/6285177007772?text=Assalamu'alaikum%2C%20saya%20membutuhkan%20bantuan" target="_blank" rel="noopener noreferrer">
+          Hubungi Kami
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Base>

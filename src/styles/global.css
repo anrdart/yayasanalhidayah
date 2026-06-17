@@ -4,8 +4,8 @@
    ============================================================ */
 
 :root {
-  --bg: #FAF7F0;
-  --bg-alt: #F0EDE4;
+  --bg: #FFFFF0;
+  --bg-alt: #F5F0DC;
   --bg-deep: #1E5FA3;
   --paper: #FFFFFF;
 
@@ -256,14 +256,14 @@ section { position: relative; }
   gap: 32px;
   padding: 12px 18px 12px 22px;
   border-radius: 999px;
-  background: rgba(250, 247, 240, 0.0);
+  background: rgba(255, 255, 240, 0.0);
   backdrop-filter: blur(0px);
   border: 1px solid transparent;
   transition: all 380ms var(--ease);
   pointer-events: auto;
 }
 .nav.scrolled .nav-inner {
-  background: rgba(250, 247, 240, 0.78);
+  background: rgba(255, 255, 240, 0.78);
   backdrop-filter: blur(18px) saturate(140%);
   border-color: var(--line);
   box-shadow: 0 12px 36px -16px rgba(20, 34, 56, 0.18);
@@ -991,7 +991,7 @@ section { position: relative; }
 .testi-attr .av {
   width: 48px; height: 48px; border-radius: 50%;
   background: linear-gradient(135deg, var(--brand-2), var(--brand));
-  color: #FAF7F0;
+  color: #FFFFF0;
   display: grid; place-items: center;
   font-family: var(--font-display);
   font-weight: 600;
@@ -1390,7 +1390,7 @@ section { position: relative; }
 
 /* 404 — force nav capsule visible always */
 body:has(.not-found) .nav-inner {
-  background: rgba(250, 247, 240, 0.78);
+  background: rgba(255, 255, 240, 0.78);
   backdrop-filter: blur(18px) saturate(140%);
   border-color: var(--line);
   box-shadow: 0 12px 36px -16px rgba(20, 34, 56, 0.18);

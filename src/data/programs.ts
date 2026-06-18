@@ -24,12 +24,12 @@ export const programs: Program[] = [
     featured: true,
   },
   {
-    title: 'Fidyah',
+    title: 'Lunasi Hutang Puasamu, Bayar Fidyahmu!',
     category: 'Fidyah',
     tag: 'Tebusan',
     slug: 'tunaikan-fidyah-bersama-alhidayah',
     image: '/program/program-fidyah.webp',
-    alt: 'Tunaikan Fidyah',
+    alt: 'Lunasi Hutang Puasamu, Bayar Fidyahmu!',
     description: 'Tidak mampu berpuasa karena sakit berkepanjangan atau usia lanjut? Tunaikan fidyah Anda — kami salurkan langsung kepada fakir miskin yang berhak menerimanya.',
     featured: true,
   },
@@ -52,7 +52,7 @@ export const programs: Program[] = [
     description: 'Musibah datang tanpa aba-aba. Bersama Anda, kami siapkan dana siaga agar bantuan logistik, obat, dan kebutuhan pokok bisa bergerak cepat saat bencana terjadi.',
   },
   {
-    title: 'Allah Tidak Menutup Pintu Ampunan',
+    title: 'Allah Tidak Menutup Pintu Ampunan, Bahkan untuk Kesalahan yang Berat Sekalipun',
     category: 'Kafarat',
     tag: 'Tebusan',
     slug: 'allah-tidak-menutup-ampunan',

@@ -15,11 +15,19 @@ interface Props {
   counts: Record<string, number>;
 }
 
-const STAT_CARDS: { key: string; label: string; icon: string; href: string }[] = [
+const rupiahCompact = (n: number): string => {
+  if (n >= 1_000_000_000) return `Rp ${(n / 1_000_000_000).toFixed(1).replace('.', ',')} M`;
+  if (n >= 1_000_000) return `Rp ${(n / 1_000_000).toFixed(1).replace('.', ',')} jt`;
+  if (n >= 1_000) return `Rp ${Math.round(n / 1000)} rb`;
+  return `Rp ${n}`;
+};
+const formatCount = (n: number): string => n.toLocaleString('id-ID');
+
+const STAT_CARDS: { key: string; label: string; icon: string; href: string; format?: (n: number) => string }[] = [
+  { key: 'programs', label: 'Total Campaign', icon: 'hand-heart', href: '/admin/content/programs' },
+  { key: 'raised', label: 'Total Donasi', icon: 'wallet', href: '/admin/content/programs', format: rupiahCompact },
+  { key: 'donatur', label: 'Total Donatur', icon: 'users', href: '/admin/content/programs' },
   { key: 'articles', label: 'Artikel', icon: 'newspaper', href: '/admin/articles' },
-  { key: 'penerima', label: 'Penerima', icon: 'building-2', href: '/admin/content/penerima' },
-  { key: 'testimonials', label: 'Testimoni', icon: 'quote', href: '/admin/content/testimonials' },
-  { key: 'contact_submissions', label: 'Pesan Masuk', icon: 'inbox', href: '/admin/submissions' },
 ];
 
 export default function DashboardHome({ recent, lastHeartbeat, counts }: Props) {
@@ -81,7 +89,9 @@ export default function DashboardHome({ recent, lastHeartbeat, counts }: Props) 
                 <Icon name={c.icon} className="size-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-semibold tabular-nums">{counts[c.key] ?? 0}</div>
+                <div className="text-2xl font-semibold tabular-nums">
+                  {c.format ? c.format(counts[c.key] ?? 0) : formatCount(counts[c.key] ?? 0)}
+                </div>
               </CardContent>
             </Card>
           </a>

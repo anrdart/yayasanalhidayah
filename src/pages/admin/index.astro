@@ -11,15 +11,22 @@ const [{ data: recent }, { data: lastHb }] = await Promise.all([
   supabase.rpc('last_heartbeat'),
 ]);
 
-// Quick content counts.
-const tables = ['articles', 'penerima', 'testimonials', 'contact_submissions'] as const;
-const counts: Record<string, number> = {};
-await Promise.all(
-  tables.map(async (t) => {
-    const { count } = await supabase.from(t).select('*', { count: 'exact', head: true });
-    counts[t] = count ?? 0;
-  }),
-);
+// Dashboard metrics. Campaign-centric (the core of the org) + content count.
+// programs carries the live donation stats synced from WP, so we aggregate
+// raised_amount / donatur_count across all rows here.
+const [programsRes, { count: articleCount }] = await Promise.all([
+  supabase.from('programs').select('raised_amount, donatur_count'),
+  supabase.from('articles').select('*', { count: 'exact', head: true }),
+]);
+
+type ProgramStat = { raised_amount: number | null; donatur_count: number | null };
+const programs = (programsRes.data ?? []) as ProgramStat[];
+const counts: Record<string, number> = {
+  programs: programs.length,
+  raised: programs.reduce((s, p) => s + (p.raised_amount ?? 0), 0),
+  donatur: programs.reduce((s, p) => s + (p.donatur_count ?? 0), 0),
+  articles: articleCount ?? 0,
+};
 ---
 <AdminLayout title="Dashboard">
   <DashboardHome

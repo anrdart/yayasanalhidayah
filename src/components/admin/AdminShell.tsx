@@ -93,14 +93,28 @@ export default function AdminShell({ currentPath, user, role, children }: Props)
                 <SidebarMenu>
                   {section.items.map((item) => (
                     <SidebarMenuItem key={item.href}>
-                      <SidebarMenuButton
-                        isActive={isActive(item, currentPath)}
-                        tooltip={item.label}
-                        render={<a href={item.href} />}
-                      >
-                        <Icon name={item.icon} />
-                        <span>{item.label}</span>
-                      </SidebarMenuButton>
+                      {item.disabled ? (
+                        <SidebarMenuButton
+                          aria-disabled="true"
+                          tabIndex={-1}
+                          tooltip="Belum tampil di situs"
+                          className="cursor-not-allowed opacity-50"
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          <Icon name={item.icon} />
+                          <span>{item.label}</span>
+                          <Icon name="lock" className="ml-auto opacity-60" />
+                        </SidebarMenuButton>
+                      ) : (
+                        <SidebarMenuButton
+                          isActive={isActive(item, currentPath)}
+                          tooltip={item.label}
+                          render={<a href={item.href} />}
+                        >
+                          <Icon name={item.icon} />
+                          <span>{item.label}</span>
+                        </SidebarMenuButton>
+                      )}
                     </SidebarMenuItem>
                   ))}
                 </SidebarMenu>

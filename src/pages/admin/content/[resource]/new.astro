@@ -3,10 +3,12 @@ export const prerender = false;
 import AdminLayout from '@/layouts/AdminLayout.astro';
 import ResourceForm from '@/components/admin/resources/ResourceForm';
 import { RESOURCES } from '@/components/admin/resources.config';
+import { isDisabledRoute } from '@/components/admin/nav.config';
 
 const slug = Astro.params.resource!;
 const def = RESOURCES[slug];
 if (!def) return Astro.redirect('/admin');
+if (isDisabledRoute(`/admin/content/${slug}`)) return Astro.redirect('/admin');
 ---
 <AdminLayout title={`Tambah ${def.label}`}>
   <ResourceForm client:load resourceSlug={slug} initial={null} />

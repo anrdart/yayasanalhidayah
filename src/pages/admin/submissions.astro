@@ -2,6 +2,10 @@
 export const prerender = false;
 import AdminLayout from '@/layouts/AdminLayout.astro';
 import SubmissionsInbox from '@/components/admin/submissions/SubmissionsInbox';
+import { isDisabledRoute } from '@/components/admin/nav.config';
+
+// Feature greyed-out: no public contact form posts here yet.
+if (isDisabledRoute('/admin/submissions')) return Astro.redirect('/admin');
 
 const { data } = await Astro.locals.supabase
   .from('contact_submissions')

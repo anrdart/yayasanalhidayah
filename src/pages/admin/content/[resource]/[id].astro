@@ -3,11 +3,13 @@ export const prerender = false;
 import AdminLayout from '@/layouts/AdminLayout.astro';
 import ResourceForm from '@/components/admin/resources/ResourceForm';
 import { RESOURCES } from '@/components/admin/resources.config';
+import { isDisabledRoute } from '@/components/admin/nav.config';
 
 const slug = Astro.params.resource!;
 const id = Astro.params.id!;
 const def = RESOURCES[slug];
 if (!def) return Astro.redirect('/admin');
+if (isDisabledRoute(`/admin/content/${slug}`)) return Astro.redirect('/admin');
 
 const { data } = await (Astro.locals.supabase as any)
   .from(def.table)

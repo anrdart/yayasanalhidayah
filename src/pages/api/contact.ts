@@ -1,0 +1,87 @@
+export const prerender = false;
+import type { APIRoute } from 'astro';
+import { z } from 'zod';
+import { ok, badRequest, serverError, clientIp } from '@/lib/api';
+import { createSupabaseAdmin } from '@/lib/supabase/admin';
+import { workerEnv } from '@/lib/supabase/runtime-env';
+
+// Google Apps Script webhook for the legacy Google Sheet. Submissions are
+// written to BOTH Supabase (contact_submissions, source of truth for the
+// dashboard inbox) and this Sheet (kept for backward compatibility).
+const APPS_SCRIPT_URL =
+  'https://script.google.com/macros/s/AKfycbxJde3L1B6syeq_ZTMIoDlcawB0fq_wum3rsWa-YXB6CqOCMAOWoyX16G8st7YHBP7O/exec';
+
+const MAX_NAMA = 120;
+const MAX_PHONE = 32;
+const MAX_EMAIL = 254;
+const MAX_TOPIK = 120;
+const MAX_PESAN = 5000;
+const MAX_HONEYPOT = 200;
+
+const schema = z.object({
+  nama: z.string().min(1, 'Nama wajib diisi').max(MAX_NAMA),
+  phone: z.string().min(1, 'Nomor WhatsApp wajib diisi').max(MAX_PHONE),
+  email: z.email('Email tidak valid').max(MAX_EMAIL).optional().or(z.literal('').transform(() => '')),
+  topik: z.string().max(MAX_TOPIK).optional().default(''),
+  pesan: z.string().min(1, 'Pesan wajib diisi').max(MAX_PESAN),
+  website: z.string().max(MAX_HONEYPOT).optional().default(''), // honeypot
+});
+
+export const POST: APIRoute = async ({ request, locals }) => {
+  let payload: z.infer<typeof schema>;
+  try {
+    payload = schema.parse(await request.json());
+  } catch (e) {
+    return badRequest(e instanceof z.ZodError ? e.issues[0]?.message ?? 'Data tidak valid' : 'Body tidak valid');
+  }
+
+  // Honeypot: if the hidden `website` field is filled, reject silently (return 200).
+  if (payload.website) return ok();
+
+  const runtimeEnv = workerEnv();
+  const admin = createSupabaseAdmin(runtimeEnv);
+
+  const ip = clientIp(request);
+  const ua = request.headers.get('user-agent') ?? null;
+
+  // 1) Source of truth: Supabase contact_submissions.
+  const { error } = await admin.from('contact_submissions').insert({
+    nama: payload.nama,
+    phone: payload.phone,
+    email: payload.email || null,
+    topik: payload.topik || null,
+    pesan: payload.pesan,
+    honeypot: payload.website || null,
+    ip,
+    user_agent: ua,
+  } as never);
+
+  if (error) return serverError(error.message);
+
+  // 2) Mirror to Google Sheet (legacy). Fire-and-forget, no-cors so the Apps
+  //    Script web app accepts the POST. Jakarta timezone matches the sheet.
+  const tanggal = new Date().toLocaleString('sv-SE', {
+    timeZone: 'Asia/Jakarta',
+    year: 'numeric', month: '2-digit', day: '2-digit',
+    hour: '2-digit', minute: '2-digit', second: '2-digit',
+  });
+  const body = new URLSearchParams({
+    nama: payload.nama,
+    phone: payload.phone,
+    email: payload.email || '',
+    topik: payload.topik || '',
+    pesan: payload.pesan,
+    tanggal,
+  });
+  try {
+    await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      body,
+      headers: { 'content-type': 'application/x-www-form-urlencoded' },
+    });
+  } catch {
+    // Sheet mirror is best-effort; don't fail the user-facing response.
+  }
+
+  return ok();
+};

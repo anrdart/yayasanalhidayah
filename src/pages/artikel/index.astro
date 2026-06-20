@@ -31,8 +31,23 @@ const { articles, totalPages } = await listPublishedArticles(Astro.locals.supaba
     <section class="section-pad" style="padding-top:0">
       <div class="container">
         {articles.length === 0 ? (
-          <div style="text-align:center;padding:80px 0">
-            <p class="lede">Belum ada artikel. Nantikan tulisan pertama kami!</p>
+          <div class="blog-empty" data-reveal>
+            <div class="blog-empty__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                <path d="M9 7h7M9 11h7" />
+              </svg>
+            </div>
+            <h2 class="blog-empty__title">Tulisan pertama sedang disiapkan</h2>
+            <p class="blog-empty__text">
+              Kami sedang menyiapkan kabar dari lapangan, update program, dan refleksi seputar amal.
+              Sementara itu, Anda bisa menjelajahi program donasi yang sedang berjalan.
+            </p>
+            <div class="blog-empty__actions">
+              <a href="/program" class="btn btn-primary">Lihat Program Donasi</a>
+              <a href="/" class="btn btn-ghost">Kembali ke Beranda</a>
+            </div>
           </div>
         ) : (
           <div class="blog-grid">
@@ -72,6 +87,53 @@ const { articles, totalPages } = await listPublishedArticles(Astro.locals.supaba
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 24px;
+  }
+  /* Zero-state: keeps the footer down and reads as intentional, not broken. */
+  .blog-empty {
+    min-height: 44vh;
+    max-width: 520px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 48px 0 24px;
+  }
+  .blog-empty__icon {
+    width: 72px;
+    height: 72px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--bg-alt);
+    color: var(--brand);
+    margin-bottom: 24px;
+  }
+  .blog-empty__icon svg { width: 32px; height: 32px; }
+  .blog-empty__title {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 2.4vw, 28px);
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.2;
+    margin: 0 0 12px;
+  }
+  .blog-empty__text {
+    color: var(--ink-2);
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0 0 28px;
+  }
+  .blog-empty__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+  @media (max-width: 480px) {
+    .blog-empty__actions { width: 100%; }
+    .blog-empty__actions .btn { width: 100%; justify-content: center; }
   }
   .blog-pagination {
     display: flex;
